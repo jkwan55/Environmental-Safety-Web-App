@@ -1,0 +1,115 @@
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 7/30/2019
+*Description:
+**************************************************************************************************
+(Used for local rendering)
+<link href="/application/src/public/stylesheets/style.css" rel="stylesheet" />
+<link href="/stylesheets/style.css" rel="stylesheet" />
+================================================================================================-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <title>ABOUT</title>
+    <link href="/stylesheets/style.css" rel="stylesheet" />
+
+<!--==============================================================================================
+**************************************************************************************************
+*Author: "Empty Template for comments"FOR LOGO
+*Class:
+*Date Updated:
+*Description: 
+**************************************************************************************************
+================================================================================================-->
+<div class="logo-img">
+    <a href="/"><img src="/images/Logo648.png" alt="" class="logo"></a>
+</div>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 7/30/2019
+*Description: The disclaimer class shows a stament that prevents confusion for possible users due 
+that this is only a school project and not a real envairmental website.
+**************************************************************************************************
+================================================================================================-->
+    <div class="disclaimer">
+            <h6>
+                “SFSU Software Engeneering Project CSC 648-848,
+                <br> Summer 2019. For Demostration Only."
+            </h6>
+    </div>
+<!--==============================================================================================
+**************************************************************************************************    
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 8/01/2019
+*Description: The navBar class displays a navigation bar that contains links to ABOUT, POST, LOG IN, 
+SIGN UP, and a search bar with categories and a button.
+**************************************************************************************************
+================================================================================================--> 
+<div class="navBar">
+    <a class="active" href="about">About</a>
+    <a href="post">Post</a>
+    <a href="contact">Contact</a>
+    <div class="navBar" id="rightSide">
+            <% if (!authenticated) { %> 
+                <a href="logIn">Log In</a>
+                <a href="signUp">Sign Up</a>
+            <% } else { %>
+                <a href="signout">Sign out</a>
+            <% } %>>
+    </div>
+        <div class="navBar" id="search">
+            <form method="get" action="/results">
+                <select name="category" id="dropDownNavBar">
+                    <option value="">All Categories</option>
+                    <option value="1" <% if (category == "1") { %> selected <% } %> >Fire</option>
+                    <option value="2" <% if (category == "2") { %> selected <% } %> >Oil spill</option>
+                    <option value="3" <% if (category == "3") { %> selected <% } %> >Waste Managment</option>
+                </select>
+                <input id="search" name="search" placeholder="Search.." type="text" value="">
+                <button type="submit" id="searchButton">Search</button>
+            </form>
+        </div>
+    </div>
+</head>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 8/01/2019
+Description: Displays a list of names for the team members.
+**************************************************************************************************
+================================================================================================-->
+<body>
+    <div id="containerAbout">
+        <p>
+            About
+        </p>
+        <div class="about_links">
+            <ul id="aboutUl">
+                <li><a href="about/Erick">Erick</a></li>
+                <li><a href="about/Jack">Jack</a></li>
+                <li><a href="about/Vincent">Vincent</a></li>
+                <li><a href="about/Hector">Hector</a></li>
+                <li><a href="about/Kevin">Kevin</a></li>
+                <li><a href="about/Jimmy">Jimmy</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: "Empty Template for comments"
+*Class:
+*Date Updated:
+*Description:
+**************************************************************************************************
+================================================================================================-->

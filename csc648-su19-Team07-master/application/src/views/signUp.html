@@ -1,0 +1,292 @@
+ <!--==============================================================================================
+ **************************************************************************************************
+    *Author: Kevin Paredes
+    *Class: CSC 648
+    *Date Updated: 7/30/2019
+    Description: The page diesplays a sign up form for a user that would like to create an account.
+    The page also displays a logo, navigation bar and a disclaimer.
+    **************************************************************************************************
+    (Used for local rendering)
+    <link href="/application/src/public/stylesheets/style.css" rel="stylesheet" />
+    <link href="/stylesheets/style.css" rel="stylesheet" />
+    ================================================================================================-->
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="ie=edge" http-equiv="X-UA-Compatible">
+        <title>SIGNUP</title>
+        <link href="/stylesheets/style.css" rel="stylesheet" />
+        
+    <!--==============================================================================================
+    **************************************************************************************************
+    *Author: Jackie Shan
+    *Class: CSC 648
+    *Date Updated: 7/30/2019
+    *Description: This logo was designed by Hector. When clicked it routes to the home page. 
+    **************************************************************************************************
+    ================================================================================================-->
+    <div class="logo-img">
+            <a href="/"><img src="/images/Logo648.png" alt="" class="logo"></a>
+    </div>
+    <!--==============================================================================================
+    **************************************************************************************************
+    *Author: Kevin Paredes
+    *Class: CSC 648
+    *Date Updated: 7/30/2019
+    *Description: The disclaimer class shows a stament that prevents confusion for possible users due 
+    that this is only a school project and not a real envairmental website.
+    **************************************************************************************************
+    ================================================================================================-->
+    <div class="disclaimer">
+        <h6>
+                “SFSU Software Engeneering Project CSC 648-848,
+                <br> Summer 2019. For Demostration Only."
+            </h6>
+    </div>
+    <!--==============================================================================================
+    **************************************************************************************************    
+    *Author: Kevin Paredes
+    *Class: CSC 648
+    *Date Updated: 8/01/2019
+    *Description: The navBar class displays a navigation bar that contains links to ABOUT, POST, LOG IN, 
+    SIGN UP, and a search bar with categories and a button.
+    **************************************************************************************************
+    ================================================================================================--> 
+        <div class="navBar">
+            <a class="active" href="about">About</a>
+            <a href="post">Post</a>
+            <a href="contact">Contact</a>
+            <div class="navBar" id="rightSide">
+                <a href="logIn">Log In</a>
+                <a href="signUp">Sign Up</a>
+            </div>
+            <div class="navBar" id="search">
+                <form method="get" action="/results">
+                    <select name="category" id="dropDownNavBar">
+                        <option value="">All Categories</option>
+                        <option value="1" <% if (category == "1") { %> selected <% } %> >Fire</option>
+                        <option value="2" <% if (category == "2") { %> selected <% } %> >Oil spill</option>
+                        <option value="3" <% if (category == "3") { %> selected <% } %> >Waste Managment</option>
+                    </select>
+                    <input id="search" name="search" placeholder="Search.." type="text" value="">
+                    <button type="submit" id="searchButton">Search</button>
+                </form>
+            </div>
+        </div>
+    </head>
+    <!--==============================================================================================
+    **************************************************************************************************
+    Author: Jackie Shan
+    Class: CSC 648
+    Date Updated: 7/30/2019
+    Description: The sign up form will allow users to sign up for a new account so they can have access all the features of the site. 
+    **************************************************************************************************
+    ================================================================================================-->
+    <body>
+        <div class="wrapper-signup">
+            <div class="container-signup">
+                <form action="/signup/submit" method="post" name="signUp">
+                    <h3 class="form-title">Sign Up</h3>
+                    <table align="center">
+
+                        <tr>
+                            <td>First Name:</td>
+                            <td><input type="text" size=25 name="firstName" required></td>
+                            <td class="required-text">*required</td>
+                        </tr>
+
+                        <tr>
+                            <td>Last Name:</td>
+                            <td><input type="text" size=25 name="lastName" required></td>
+                            <td class="required-text">*required</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td><input type="text" size=25 name="email" required></td>
+                            <td class="required-text">*required</td>
+                        </tr>
+                        <tr>
+                            <td>Password:</td>
+                            <td><input type="Password" size=25 name="password" required></td>
+                            <td class="required-text">*required</td>
+                        </tr>
+                        <tr>
+                            <td>Confirm Password:</td>
+                            <td><input type="Password" size=25 name="confirmPassword" required></td>
+                            <td class="required-text">*required</td>
+                        </tr>
+                    </table>
+                    
+                    <!-- start of check box -->
+                    <p align="center"><input type="checkbox" required name="terms"> I accept the <a href="#" class="tos-link"><u>Terms and Conditions</u></a></p>
+                    <!-- end of check box -->
+                    
+                    <div class="button-container">
+                    <div class="wrapper-button">
+                        <a href="/"><button type="submit">Cancel</button></a>
+                    </div>
+                    <div class="wrapper-button">
+                        <a href="/"><button type="submit">Create Account</button></a>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+    </html>
+    <!--==============================================================================================
+    **************************************************************************************************
+    *Author: "Empty Template for comments"
+    *Class:
+    *Date Updated:
+    *Description:
+    **************************************************************************************************
+    ================================================================================================-->
+<!--=======-->
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 7/30/2019
+Description: The page diesplays a sign up form for a user that would like to create an account.
+The page also displays a logo, navigation bar and a disclaimer.
+**************************************************************************************************
+(Used for local rendering)
+<link href="/application/src/public/stylesheets/style.css" rel="stylesheet" />
+<link href="/stylesheets/style.css" rel="stylesheet" />
+================================================================================================-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>SIGNUP</title>
+    <link href="/stylesheets/style.css" rel="stylesheet" />
+-->
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Jackie Shan
+*Class: CSC 648
+*Date Updated: 7/30/2019
+*Description: This logo was designed by Hector. When clicked it routes to the home page. 
+**************************************************************************************************
+================================================================================================-->
+<!--
+<div class="logo-img">
+        <a href="/"><img src="../images/Logo648.jpg" alt="" class="logo"></a>
+</div>
+-->
+
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 7/30/2019
+*Description: The disclaimer class shows a stament that prevents confusion for possible users due 
+that this is only a school project and not a real envairmental website.
+**************************************************************************************************
+================================================================================================-->
+<!--
+<div class="disclaimer">
+    <h6>
+            “SFSU Software Engeneering Project CSC 648-848,
+            <br> Summer 2019. For Demostration Only."
+        </h6>
+</div>
+-->
+<!--==============================================================================================
+**************************************************************************************************    
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 7/30/2019
+*Description: The navBar class displays a navigation bar that contains links to ABOUT, POST, LOG IN, 
+SIGN UP, and a search bar with categories and a button.
+**************************************************************************************************
+================================================================================================--> 
+<!--
+    <div class="navBar">
+        <a class="active" href="about">About</a>
+        <a href="post">Post</a>
+        <a href="contact">Contact</a>
+        <div class="navBar" id="rightSide">
+            <a href="logIn">Log In</a>
+            <a href="signUp">Sign Up</a>
+        </div>
+        <div class="navBar" id="search">
+            <form method="post" action="/">
+                <input id="search" name="search" placeholder="Search.." type="text" value="">
+                <select name="category" onchange="this.form.submit()">
+                    <option value="">All Categories</option>
+                    <option value="Category1" <% if (category == "Category1") { %> selected <% } %> >Fire</option>
+                    <option value="Category2" <% if (category == "Category2") { %> selected <% } %> >Oil spill</option>
+                    <option value="Category3" <% if (category == "Category3") { %> selected <% } %> >Waste Managment</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</head>
+-->
+<!--==============================================================================================
+**************************************************************************************************
+Author: Jackie Shan
+Class: CSC 648
+Date Updated: 7/30/2019
+Description: The sign up form will allow users to sign up for a new account so they can have access all the features of the site. 
+**************************************************************************************************
+================================================================================================-->
+<!--
+<body>
+    <div class="wrapper-signup">
+        <div class="container-signup">
+            <form action="/signup/submit" method="post" name="signUp">
+                <table align="center">
+
+                    <tr>
+                        <td>First Name:</td>
+                        <td><input type="text" size=25 name="firstName" required></td>
+                    </tr>
+
+                    <tr>
+                        <td>Last Name:</td>
+                        <td><input type="text" size=25 name="lastName" required></td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td><input type="text" size=25 name="email" required></td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input type="Password" size=25 name="password" required></td>
+                    </tr>
+                    <tr>
+                        <td>Confirm Password:</td>
+                        <td><input type="Password" size=25 name="confirmPassword" required></td>
+                    </tr>
+
+                </table>
+                <div class="wrapper-button">
+                    <button type="submit">Create Account</button>
+                </div>
+                <div class="wrapper-button">
+                    <button type="submit">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+-->
+<!--==============================================================================================
+**************************************************************************************************
+*Author: "Empty Template for comments"
+*Class:
+*Date Updated:
+*Description:
+**************************************************************************************************
+================================================================================================-->
+

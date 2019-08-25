@@ -1,0 +1,164 @@
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 7/30/2019
+Description: The page displays a form with a calendar, category dropdow, upload image and 
+submit/cancel buttons. The page also contains a navigaton bar, disclaimer and a logo.
+**************************************************************************************************
+(Used for local rendering)
+<link href="/application/src/public/stylesheets/style.css" rel="stylesheet" />
+<link href="/stylesheets/style.css" rel="stylesheet" />
+================================================================================================-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>POST</title>
+    <link href="/stylesheets/style.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 8/11/2019
+*Description: Sends an alert for the user once the post has been submitted.
+**************************************************************************************************
+================================================================================================-->
+    <script>
+        function myFunction() {
+            alert("The form was submitted.");
+        }
+    </script>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Jackie Shan
+*Class: CSC 648
+*Date Updated: 7/30/2019
+*Description: This logo was designed by Hector. When clicked it routes to the home page. 
+**************************************************************************************************
+================================================================================================-->
+    <div class="logo-img">
+        <a href="/"><img src="/images/Logo648.png" alt="" class="logo"></a>
+    </div>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 7/30/2019
+*Description: The disclaimer class shows a stament that prevents confusion for possible users due 
+that this is only a school project and not a real envairmental website.
+**************************************************************************************************
+================================================================================================-->
+    <div class="disclaimer">
+        <h6>
+            “SFSU Software Engeneering Project CSC 648-848,
+            <br> Summer 2019. For Demostration Only."
+        </h6>
+    </div>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 7/30/2019
+*Description: The disclaimer class shows a stament that prevents confusion for possible users due 
+that this is only a school project and not a real envairmental website.
+**************************************************************************************************
+================================================================================================-->
+    <div class="navBar">
+        <a class="active" href="about">About</a>
+        <a href="post">Post</a>
+        <a href="contact">Contact</a>
+        <div class="navBar" id="rightSide">
+                <% if (!authenticated) { %> 
+                    <a href="logIn">Log In</a>
+                    <a href="signUp">Sign Up</a>
+                <% } else { %>
+                    <a href="signout">Sign out</a>
+                <% } %>>
+        </div>
+        <div class="navBar" id="search">
+            <form method="get" action="/results">
+                <select name="category" id="dropDownNavBar">
+                    <option value="">All Categories</option>
+                    <option value="1" <% if (category == "1") { %> selected <% } %> >Fire</option>
+                    <option value="2" <% if (category == "2") { %> selected <% } %> >Oil spill</option>
+                    <option value="3" <% if (category == "3") { %> selected <% } %> >Waste Managment</option>
+                </select>
+                <input id="search" name="search" placeholder="Search.." type="text" value="">
+                <button type="submit" id="searchButton">Search</button>
+            </form>
+        </div>
+    </div>
+</head>
+<body>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 8/01/2019
+Description: this class has a calendar, dropdown, upload image option and cancel/submit buttons. 
+**************************************************************************************************
+================================================================================================-->
+    <div class="containerPost">
+        <div id="titlePost">
+            <h3>POST</h3>
+        </div>
+        <div id="postForm">
+            <form method="post" action="/post/submit" onsubmit="myFunction()" enctype="multipart/form-data">
+                <table align="left">
+                    <tr>
+                        <td>Select a Park: </td>
+                        <td><select name="park" id="dropDownPost" required>
+                            <option value="0" >Brooks Park</option>
+                            <option value="1" >Golden Gate Park</option>
+                            <option value="2" >Buena Vista Park</option>
+                            <option value="3" >Bernal Heigths Park</option>
+                            <option value="4" >Dolores Par</option>
+                            <option value="5" >Glen Canyon Park</option>
+                            <option value="6" >Lake Merced Park</option>
+                            <option value="7" >Corona Heigths Park</option>
+                            <option value="8" >Mountain Lake Trail</option>
+                            <option value="9" >Balboa Park</option>
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Date: </td>
+                        <td><input type="date" name="date" id="id"></td>
+                    </tr>
+                    <tr>
+                        <td>Type of issue: </td>
+                        <td><select name="category" id="postDropDown">
+                                <option value="1">Fire</option>
+                                <option value="2">Oil Spill</option>
+                                <option value="3">Waste</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td><input type="file" name="image" accept="image/*"></td>
+                    </tr>
+                    <td>Enter a description of the Issue:</td>
+                </table>
+                <div id="description">
+                    <textarea style="resize: none" name="description" id="info" cols="60" rows="10" maxlength="400" placeholder="Maximum 400 characters..."></textarea>
+                </div>
+                <button type="cancel" id="cancelButton"> Cancel</button>
+                <button type="submit" id="submitButton"> Finish</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: "Empty Template for comments"
+*Class:
+*Date Updated:
+*Description:
+**************************************************************************************************
+================================================================================================-->

@@ -1,0 +1,200 @@
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 7/30/2019
+*Description: This page displays a map and a list of some of the local park in San Francisco.
+The page also displays a navigation bar, disclaimer and logo.
+**************************************************************************************************
+(Used for local rendering)
+<link href="/application/src/public/stylesheets/style.css" rel="stylesheet" />
+<link href="/stylesheets/style.css" rel="stylesheet" />
+================================================================================================-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141185844-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-141185844-2');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <title>HOMEPAGE</title>
+    <link href="/stylesheets/style.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: "Empty Template for comments"
+*Class:
+*Date Updated:
+*Description:
+**************************************************************************************************
+================================================================================================-->
+<script>
+    function logInStatus()
+    {
+        var status;
+        if (confirm("You have succelfully log in"))
+        {
+            status = "logged In!"
+        }
+    }
+</script>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Jackie Shan
+*Class: CSC 648
+*Date Updated: 7/30/2019
+*Description: This logo was designed by Hector. When clicked it routes to the home page. 
+**************************************************************************************************
+================================================================================================-->
+    <div class="logo-img">
+        <a href="/"><img src="/images/Logo648.png" alt="" class="logo"></a>
+    </div>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 7/30/2019
+*Description: The disclaimer class shows a stament that prevents confusion for possible users due 
+that this is only a school project and not a real envairmental website.
+**************************************************************************************************
+================================================================================================-->
+    <div class="disclaimer">
+        <h6>
+            “SFSU Software Engeneering Project CSC 648-848,
+            <br> Summer 2019. For Demostration Only."
+        </h6>
+    </div>
+<!--==============================================================================================
+**************************************************************************************************    
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 8/01/2019
+*Description: The navBar class displays a navigation bar that contains links to ABOUT, POST, LOG IN, 
+SIGN UP, and a search bar with categories and a button.
+**************************************************************************************************
+================================================================================================-->
+    <div class="navBar">
+        <a class="active" href="about">About</a>
+        <a href="post">Post</a>
+        <a href="contact">Contact</a>
+        
+        <div class="navBar" id="rightSide">
+        <% if (!authenticated) { %> 
+            <a href="logIn">Log In</a>
+            <a href="signUp">Sign Up</a>
+        <% } else { %>
+            <a href="signout">Sign out</a>
+        <% } %>
+        </div>
+        <div class="navBar" id="search">
+            <form method="get" action="/results">
+                <select name="category" id="dropDownNavBar">
+                    <option value="">All Categories</option>
+                    <option value="1" <% if (category == "1") { %> selected <% } %> >Fire</option>
+                    <option value="2" <% if (category == "2") { %> selected <% } %> >Oil spill</option>
+                    <option value="3" <% if (category == "3") { %> selected <% } %> >Waste Managment</option>
+                </select>
+                <input id="search" name="search" placeholder="Search.." type="text" value="">
+                <button type="submit" id="searchButton">Search</button>
+            </form>
+        </div>
+    </div>
+</head>
+<body>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 8/01/2019
+*Description: This class displays a summary of the benefits of using our website.
+**************************************************************************************************
+================================================================================================-->
+    <div id="details">
+        <p>Our services help you to protect the community
+            <br>and the enviroment by sharing reports and
+            <br>updates related to environmental issues.
+        </p>
+    </div>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 8/01/2019
+*Description: This class allow us to create a map by using the Google Maps API. The class includes
+fuctions that request for permission from the user in order to mark a current location. If the user
+does not allow sharing the location then the map will display San Francisco by default.
+**************************************************************************************************
+================================================================================================-->
+<div id="containerIndex">
+    <div id="map">
+        <script>
+            /**
+             * Functions that render map and dynamically add park names to index.html
+             * 
+             * Authors: Kevin Paredes and Erick Velez
+             */
+            $(document).ready(function() {
+                //Convert rendered data into JSON string
+                let parks = <%- JSON.stringify(searchResults) %>;
+
+                for (let i = 0; i < parks.length; i++) {
+                    let parkName = String(parks[i]['Location']);
+                    let uriToEncode = '/results?search=' + parkName + '&category=';
+                    let encodedURI = encodeURI(uriToEncode); //encode to valid URI for href
+
+                    //Create a list item with an anchor for each park name
+                    let listItem = '<li><a href=' + encodedURI +'>' + parkName + '</a></li>';
+                
+                    document.getElementById('parkList').innerHTML += listItem;
+                }
+            });
+            
+            var map, infoWindow;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {
+                        lat: 37.773972,
+                        lng: -122.431297
+                    },
+                    zoom: 12
+                });
+            }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz0xeLyqgYCgChd_cu1TroCXMgCmpr_NU&callback=initMap" async defer></script>
+        </div>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 7/30/2019
+*Description: This class displays a list of some local park located in the area of San Francisco.
+**************************************************************************************************
+================================================================================================-->
+    <div id="wrapperList">
+        <div id="list">
+            <h3>List of Local Parks</h3>
+            <ul id="parkList">
+                
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: "Empty Template for comments"
+*Class:
+*Date Updated:
+*Description:
+**************************************************************************************************
+================================================================================================-->
+

@@ -1,0 +1,186 @@
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 7/30/2019
+Description: This page diesplays the result from the search bar function. The page also contains 
+a navigation bar, logo, and disclaimer.
+**************************************************************************************************
+(Used for local rendering)
+<link href="/application/src/public/stylesheets/style.css" rel="stylesheet" />
+<link href="/stylesheets/style.css" rel="stylesheet" />
+================================================================================================-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>RESULTS</title>
+    <link href="/stylesheets/style.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Jackie Shan
+*Class: CSC 648
+*Date Updated: 7/30/2019
+*Description: This logo was designed by Hector. When clicked it routes to the home page. 
+**************************************************************************************************
+================================================================================================-->
+<div class="logo-img">
+        <a href="/"><img src="/images/Logo648.png" alt="" class="logo"></a>
+</div>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 7/30/2019
+*Description: The disclaimer class shows a stament that prevents confusion for possible users due 
+that this is only a school project and not a real envairmental website.
+**************************************************************************************************
+================================================================================================-->
+    <div class="disclaimer">
+        <h6>
+            “SFSU Software Engeneering Project CSC 648-848,
+            <br> Summer 2019. For Demostration Only."
+        </h6>
+        </div>
+    </div>
+<!--==============================================================================================
+**************************************************************************************************    
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 8/01/2019
+*Description: The navBar class displays a navigation bar that contains links to ABOUT, POST, LOG IN, 
+SIGN UP, and a search bar with categories and a button.
+**************************************************************************************************
+================================================================================================-->      
+    <div class="navBar">
+        <a class="active" href="about">About</a>
+        <a href="post">Post</a>
+        <a href="contact">Contact</a>
+        <div class="navBar" id="rightSide">
+                <% if (!authenticated) { %> 
+                    <a href="logIn">Log In</a>
+                    <a href="signUp">Sign Up</a>
+                <% } else { %>
+                    <a href="signout">Sign out</a>
+                <% } %>
+        </div>
+        <div class="navBar" id="search">
+            <form method="get" action="/results">
+                <select name="category" id="dropDownNavBar">
+                    <option value="">All Categories</option>
+                    <option value="1" <% if (category == "1") { %> selected <% } %> >Fire</option>
+                    <option value="2" <% if (category == "2") { %> selected <% } %> >Oil spill</option>
+                    <option value="3" <% if (category == "3") { %> selected <% } %> >Waste Managment</option>
+                </select>
+                <input id="search" name="search" placeholder="Search.." type="text" value="">
+                <button type="submit" id="searchButton">Search</button>
+            </form>
+        </div>
+    </div>
+</head>
+
+<body>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: Kevin Paredes
+*Class: CSC 648
+*Date Updated: 7/30/2019
+Description: This class displays a container for the result from the search fuction. 
+**************************************************************************************************
+================================================================================================-->
+
+   <div class="resultContainer">
+        <div id="result">
+            <!-- <div id="resultTitle">Number of results: <span id="resultCounter"></span></div>
+            <h4 id="resultTitle">Search Results:</h4> -->
+            <!-- <div class="resultCard">
+                <div class="result-col-1">
+                    <div class="resultCategoryRow">
+                        Category: fire      
+                    </div>
+                    <div class="resultDateRow">
+                        date: 8/10/2019
+                    </div>
+                    <div class="resultLocationRow">
+                        location: sunset park
+                    </div>
+                </div>
+                <div class="result-col-2">
+                    Description: There is a big fire
+                </div>         
+            </div> -->
+        </div>
+
+        <div id="resultMap">
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Functions to load map and results onto page
+         * 
+         * Authors: Kevin Paredes and Erick Velez
+         */
+        $(document).ready(function() {
+            //Inject HTML to show results
+            <% for (var i = 0; i < searchResults.length; i++) { %>
+                    // Result cards do not render well unless all HTML is added together, so it is a messy line
+                    document.getElementById('result').innerHTML += '<div class="resultCard"><div class="result-col-1"><div class="resultCategoryRow"> Issue Category: <%= searchResults[i]['Category_Name'] %></div><div class="resultDateRow">Date: <%= searchResults[i]['Date'] %></div><div class="resultLocationRow">Location: <%= searchResults[i]['Location'] %></div> <div class="resultStatusRow">Status: <%= searchResults[i]['Status'] %> </div></div><div class="result-col-2"><div class="resultDescription">Description: <%= searchResults[i]['Description'] %></div><div class="resultThumbnail"><img src="<%= searchResults[i]['Image'] %>" alt="Picture" height="75" width="75"></div></div>'
+                    <% } %>
+            });
+
+        //Convert rendered data to a JSON array
+        const issues = <%- JSON.stringify(searchResults) %>;
+
+        function initMap() { // function is called once the API is loaded in the script tag below
+            const map = new google.maps.Map(document.getElementById('resultMap'), {
+                center: {
+                    lat: 37.773972,
+                    lng: -122.431297
+                },
+                zoom: 12
+            });
+
+            for (let i = 0; i < issues.length; i++) {
+                let currentIssue = issues[i];
+
+                //Initial values are undefined 
+                //Thus we must convert passed values to Strings, then Numbers
+                let descriptionString = String(currentIssue['Description']);
+                let latNum = Number(currentIssue['Latitude']);
+                let lngNum = Number(currentIssue['Longitude']);
+                //contentString will appear in marker tooltip
+                let contentString = String(currentIssue['Description']);
+    
+                //infoWindow is the tooltip itself
+                let tooltip = new google.maps.InfoWindow({
+                    content: contentString
+                });
+                
+                let marker = new google.maps.Marker({
+                    position: {lat: latNum, lng: lngNum},
+                    map: map,
+                    title: currentIssue['Description']
+                });
+
+                marker.addListener('click', function() {
+                    tooltip.open(map, marker);
+                });
+            }
+        }
+        </script> 
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz0xeLyqgYCgChd_cu1TroCXMgCmpr_NU&callback=initMap" async defer></script>
+        <script src="/scripts/markerclusterer.js"></script>
+</body>
+</html>
+<!--==============================================================================================
+**************************************************************************************************
+*Author: "Empty Template for comments"
+*Class:
+*Date Updated:
+*Description:
+**************************************************************************************************
+================================================================================================-->
